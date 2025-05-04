@@ -8,6 +8,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YBRMP4FZX0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-YBRMP4FZX0');
+    </script>
 </head>
 <body>
     <nav class="main-nav">
@@ -32,54 +57,76 @@
                 </svg>
             </a>
             <div class="nav-links">
-                <a href="https://cal.com/kyle-mann" class="nav-link" target="_blank">Schedule Demo</a>
+                <a href="https://cal.com/kyle-mann/with-line-demo" class="nav-link" target="_blank">Schedule Demo</a>
                 <a href="#contact" class="cta-button">Get Early Access</a>
             </div>
         </div>
     </nav>
-
-    <main>
-        <!-- Hero Section -->
+    <div class="header-bg-container">
+        <div class="overlay"></div>
         <section class="hero">
-            <h1>Your AI Assistant for Catering and Event Sales</h1>
+            <h1>Your AI assistant for catering and event sales</h1>
             <p class="subtext"><strong>For your customers:</strong> instant, professional responses.<br><strong>For your business:</strong> faster bookings, less manual work.</p>
-            <div class="video-container">
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/embed/p20MUD0Qcsw?si=GmjB0sWQfcTWtEOB" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen>
-                </iframe>
+        </section>
+    </div>
+    <main>
+        <section class="features-stacked">
+            <!-- Section 1 -->
+            <div class="feature-block">
+                <h3>Help your customers instantly 24/7</h3>
+                <img src="/images/ai_sales-ezgif.com-speed.gif" alt="AI assistant helping customer inquiry" class="feature-img" />
+                <p>Line's AI assistant responds instantly to event inquiries, asking qualifying questions and offering property and package details, helping guests feel taken care of while saving your team hours.</p>
+            </div>
+            <!-- Section 2 -->
+            <div class="feature-block">
+                <h3>Save time with AI-powered sales</h3>
+                <img src="/images/manager_gif-ezgif.com-speed.gif" alt="Event manager dashboard with proposal generator" class="feature-img" />
+                <p>Managers receive summarized inquiry details and use AI to generate proposals, timelines, and follow-ups, speeding up the sales process and improving quality.</p>
+            </div>
+            <!-- Section 3 -->
+            <div class="feature-block">
+                <h3>Understand your inquiry service</h3>
+                <img src="/images/analytics-dashboard.png" alt="Line analytics showing funnel, volume, and time data" class="feature-img" />
+                <p>Track inquiry volume, response time, and sales funnel performance in one place. Line gives your team insights to close faster and optimize event sales operations.</p>
             </div>
         </section>
-
         <!-- CTA Section -->
         <section id="contact" class="cta-section">
-            <h2>Interested in serving customers smarter with AI?</h2>
-            <p class="cta-subtext">Sign up and we'll notify you with early access.</p>
-            <div id="form-container">
-                <form id="email-form">
-                    <input type="email" name="email" placeholder="Enter your email" required />
-                    <button type="submit">Notify Me</button>
-                </form>
+            <div class="cta-inner">
+                <h2>Interested in serving customers smarter with AI?</h2>
+                <p class="cta-subtext">Sign up and we'll notify you with early access.</p>
+                <div id="form-container">
+                    <form id="email-form" action="https://formspree.io/f/mwpolggp" method="POST">
+                        <input type="email" name="email" placeholder="Enter your email" required />
+                        <button type="submit">Notify Me</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
-
     <footer>
-        <p>© 2025 withline.xyz</p>
+        <p>© 2025 With Line LLC. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
     <script>
-        document.getElementById('email-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            document.getElementById('form-container').innerHTML = "<p class='thank-you'>Thank you! We'll be in touch soon.</p>";
+    document.getElementById('email-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        // Send the form data to Formspree
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
         });
+
+        if (response.ok) {
+            document.getElementById('form-container').innerHTML = "<p class='thank-you'>Thank you! We'll be in touch soon.</p>";
+        } else {
+            document.getElementById('form-container').innerHTML = "<p class='thank-you'>There was an error. Please try again later.</p>";
+        }
+    });
     </script>
 </body>
 </html> 
