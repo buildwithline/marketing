@@ -26,13 +26,13 @@ h1, h2, p, .subtext, .nav-link, .cta-button {
 }
 
 h1 {
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(4rem, 10vw, 7rem);
     font-weight: 700;
     line-height: 1.2;
     color: var(--primary-color);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
-    max-width: 800px;
+    max-width: 1200px;
 }
 
 h2 {
@@ -175,7 +175,7 @@ section {
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(4rem, 10vw, 7rem);
     font-weight: 700;
     line-height: 1.2;
     color: var(--primary-color);
@@ -266,16 +266,12 @@ section {
 }
 
 .cta-section h2 {
-    background: none;
-    width: auto;
-    position: static;
-    left: auto;
-    right: auto;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
-    text-align: left;
-    border-bottom: none;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
 }
 
 .cta-subtext {
@@ -344,6 +340,15 @@ section {
     background-color: #2a2a3e;
     color: white;
     transform: translateY(-1px);
+}
+
+#email-form input[type="email"] {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 0;
+    font-size: 1rem;
+    min-width: 0;
 }
 
 /* Footer */
@@ -458,12 +463,12 @@ footer {
 }
 
 .feature-block h3 {
-    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-    letter-spacing: -0.01em;
     line-height: 1.15;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
 }
 
 .feature-block p {
@@ -615,7 +620,7 @@ footer {
     width: 100%;
     min-height: 700px;
     height: 100vh;
-    max-height: 800px;
+    max-height:900px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -624,6 +629,7 @@ footer {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border-bottom: 2px solid #f6f6f6;
 }
 
 .header-bg-container .overlay {
@@ -635,7 +641,7 @@ footer {
     width: 100%;
     height: 100%;
     background-color: white;
-    opacity: 0.8;
+    opacity: .95;
     pointer-events: none;
     z-index: 1;
 }
@@ -693,7 +699,12 @@ footer {
 }
 
 .blog-section h2 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--primary-color);
     margin-bottom: 3rem;
+    letter-spacing: -0.01em;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -999,4 +1010,46 @@ a {
 
 a:hover {
     color: #333333;
+}
+
+.two-column {
+    padding: 4rem 0;
+}
+
+.columns-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 2rem;
+}
+
+.column h4 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+.column ul, .column ol {
+    list-style-position: outside;
+    padding-left: 1.5rem;
+}
+
+.column ul li, .column ol li {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.column ol li {
+    padding-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .columns-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 } 
