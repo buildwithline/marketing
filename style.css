@@ -200,6 +200,7 @@ section {
     border-radius: 0;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 16/9;
 }
 
 .video-container iframe {
@@ -540,7 +541,7 @@ footer {
 
 @media (max-width: 480px) {
     .nav-container {
-        padding: 1rem;
+        padding: 2rem;
     }
     .nav-links {
         gap: 1rem;
@@ -559,9 +560,9 @@ footer {
         margin: 1.5rem 0;
     }
     .hero {
-        padding-top: calc(var(--spacing-unit) * 3);
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-top: 120px;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
     .hero .subtext {
         margin-bottom: 1.5rem;
@@ -584,6 +585,9 @@ footer {
     }
     .mobile-demo-link {
         display: inline-block !important;
+    }
+    .header-bg-container .overlay {
+        opacity: 1;
     }
 }
 
