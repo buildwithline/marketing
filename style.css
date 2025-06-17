@@ -26,9 +26,9 @@ h1, h2, p, .subtext, .nav-link, .cta-button {
 }
 
 h1 {
-    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-size: clamp(4rem, 12vw, 8rem);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1;
     color: var(--primary-color);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
@@ -175,9 +175,9 @@ section {
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-size: clamp(4rem, 12vw, 8rem);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1;
     color: var(--primary-color);
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
@@ -194,7 +194,7 @@ section {
 
 .hero-subtext {
     margin-bottom: 2rem;
-    max-width: 1000px;
+    max-width: 1400px;
 }
 
 .hero-subtext p {
@@ -202,6 +202,10 @@ section {
     line-height: 1.4;
     color: var(--text-color);
     margin-bottom: 0.25rem;
+}
+
+.hero-subtext p:first-child {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
 }
 
 .hero-subtext p:last-child {
