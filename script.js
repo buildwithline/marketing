@@ -73,148 +73,183 @@ document.addEventListener('DOMContentLoaded', updateActiveNavLink);
 // Handle hash changes
 window.addEventListener('hashchange', updateActiveNavLink);
 
-// Blog post functionality
-function openBlogPost(postId) {
-    // Close all posts first
-    document.querySelectorAll('.blog-card').forEach(card => {
-        card.classList.remove('active');
-    });
-    document.querySelectorAll('.blog-content').forEach(content => {
-        content.classList.remove('active');
-    });
-
-    // Open the selected post
-    const selectedCard = document.querySelector(`.blog-card[data-post="${postId}"]`);
-    const selectedContent = document.querySelector(`.blog-content[data-post="${postId}"]`);
+// Blog card expand/collapse functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const blogCards = document.querySelectorAll('.blog-card');
     
-    if (selectedCard && selectedContent) {
-        selectedCard.classList.add('active');
-        selectedContent.classList.add('active');
-        
-        // Update URL
-        const url = new URL(window.location);
-        url.searchParams.set('post', postId);
-        window.history.pushState({}, '', url);
-        
-        // Scroll to content
-        selectedContent.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
-function closeBlogPost() {
-    // Close all posts
-    document.querySelectorAll('.blog-card').forEach(card => {
-        card.classList.remove('active');
-    });
-    document.querySelectorAll('.blog-content').forEach(content => {
-        content.classList.remove('active');
+    blogCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Don't trigger if clicking on share button
+            if (e.target.closest('.share-button')) {
+                return;
+            }
+            
+            const postId = card.getAttribute('data-post');
+            const expandedContent = document.querySelector(`.blog-content-expanded[data-post="${postId}"]`);
+            const isActive = card.classList.contains('active');
+            
+            // Close all other cards and content first
+            blogCards.forEach(otherCard => {
+                if (otherCard !== card) {
+                    otherCard.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('.blog-content-expanded').forEach(content => {
+                if (content !== expandedContent) {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Toggle current card and content
+            if (isActive) {
+                card.classList.remove('active');
+                if (expandedContent) {
+                    expandedContent.classList.remove('active');
+                }
+            } else {
+                card.classList.add('active');
+                if (expandedContent) {
+                    expandedContent.classList.add('active');
+                    
+                    // Smooth scroll to the expanded content
+                    setTimeout(() => {
+                        const navHeight = 90;
+                        const extraPadding = 40;
+                        const elementPosition = expandedContent.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - navHeight - extraPadding;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            }
+        });
     });
     
-    // Remove post from URL
+    // Share button functionality
+    const shareButtons = document.querySelectorAll('.share-button');
+    shareButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const postId = button.getAttribute('data-post');
+            const url = new URL(window.location);
+            url.searchParams.set('post', postId);
+            
+            navigator.clipboard.writeText(url.toString()).then(() => {
+                // Create a temporary notification
+                const notification = document.createElement('div');
+                notification.textContent = 'Link copied to clipboard!';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--primary-color);
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    z-index: 1000;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    transition: opacity 0.3s ease;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 2000);
+            }).catch(() => {
+                alert('Link copied to clipboard!');
+            });
+        });
+    });
+    
+    // Handle URL state on page load
     const url = new URL(window.location);
-    url.searchParams.delete('post');
-    window.history.pushState({}, '', url);
-}
-
-// Blog card click handler
-document.querySelectorAll('.blog-card').forEach(card => {
-    card.addEventListener('click', () => {
-        const postId = card.getAttribute('data-post');
-        const blogContent = document.querySelector(`.blog-content[data-post="${postId}"]`);
+    const postId = url.searchParams.get('post');
+    if (postId) {
+        const targetCard = document.querySelector(`.blog-card[data-post="${postId}"]`);
+        const targetContent = document.querySelector(`.blog-content-expanded[data-post="${postId}"]`);
         
-        // If the card is already active, deactivate it and hide content
-        if (card.classList.contains('active')) {
-            card.classList.remove('active');
-            blogContent.classList.remove('active');
-            return;
+        if (targetCard && targetContent) {
+            targetCard.classList.add('active');
+            targetContent.classList.add('active');
+            
+            // Scroll to the content
+            setTimeout(() => {
+                const navHeight = 90;
+                const extraPadding = 40;
+                const elementPosition = targetContent.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight - extraPadding;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }, 100);
         }
-        
-        // Remove active class from all cards and content
-        document.querySelectorAll('.blog-card').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.blog-content').forEach(c => c.classList.remove('active'));
-        
-        // Add active class to clicked card and its content
-        card.classList.add('active');
-        blogContent.classList.add('active');
-
-        // Add offset for the fixed navigation (90px) plus some extra padding (40px)
-        const navHeight = 90;
-        const extraPadding = 40;
-        const elementPosition = blogContent.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navHeight - extraPadding;
-        
-        window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-        });
-    });
-});
-
-// Add click event listeners to share buttons
-document.querySelectorAll('.share-button').forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const postId = button.getAttribute('data-post');
+    }
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', () => {
         const url = new URL(window.location);
-        url.searchParams.set('post', postId);
-        navigator.clipboard.writeText(url.toString()).then(() => {
-            alert('Link copied to clipboard!');
-        });
-    });
-});
-
-// Handle URL state on page load
-window.addEventListener('load', () => {
-    const url = new URL(window.location);
-    const postId = url.searchParams.get('post');
-    if (postId) {
-        openBlogPost(postId);
-    }
-});
-
-// Handle browser back/forward buttons
-window.addEventListener('popstate', () => {
-    const url = new URL(window.location);
-    const postId = url.searchParams.get('post');
-    if (postId) {
-        openBlogPost(postId);
-    } else {
-        closeBlogPost();
-    }
-});
-
-// Handle next post links
-document.querySelectorAll('.next-post-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const nextPostId = link.getAttribute('data-next');
+        const postId = url.searchParams.get('post');
         
-        // Close all blog posts
-        document.querySelectorAll('.blog-card').forEach(card => {
-            card.classList.remove('active');
-        });
-        document.querySelectorAll('.blog-content').forEach(content => {
+        // Close all cards and content
+        blogCards.forEach(card => card.classList.remove('active'));
+        document.querySelectorAll('.blog-content-expanded').forEach(content => {
             content.classList.remove('active');
         });
         
-        // Open the next post
-        const nextCard = document.querySelector(`.blog-card[data-post="${nextPostId}"]`);
-        const nextContent = document.querySelector(`.blog-content[data-post="${nextPostId}"]`);
-        
-        if (nextCard && nextContent) {
-            nextCard.classList.add('active');
-            nextContent.classList.add('active');
+        if (postId) {
+            const targetCard = document.querySelector(`.blog-card[data-post="${postId}"]`);
+            const targetContent = document.querySelector(`.blog-content-expanded[data-post="${postId}"]`);
             
-            // Add offset for the fixed navigation (90px) plus some extra padding (40px)
-            const navHeight = 90;
-            const extraPadding = 40;
-            const elementPosition = nextContent.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - navHeight - extraPadding;
-            
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            if (targetCard && targetContent) {
+                targetCard.classList.add('active');
+                targetContent.classList.add('active');
+            }
         }
+    });
+
+    // Handle next post links
+    document.querySelectorAll('.next-post-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const nextPostId = link.getAttribute('data-next');
+            
+            // Close all blog posts
+            blogCards.forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelectorAll('.blog-content-expanded').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Open the next post
+            const nextCard = document.querySelector(`.blog-card[data-post="${nextPostId}"]`);
+            const nextContent = document.querySelector(`.blog-content-expanded[data-post="${nextPostId}"]`);
+            
+            if (nextCard && nextContent) {
+                nextCard.classList.add('active');
+                nextContent.classList.add('active');
+                
+                // Add offset for the fixed navigation (90px) plus some extra padding (40px)
+                const navHeight = 90;
+                const extraPadding = 40;
+                const elementPosition = nextContent.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight - extraPadding;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 }); 
