@@ -142,10 +142,13 @@ h2 {
     font-weight: 500;
     transition: var(--transition);
     font-size: 0.95rem;
+    position: relative;
+    z-index: 10;
 }
 
 .cta-button:hover {
     background-color: #2a2a3e;
+    color: white;
     transform: translateY(-1px);
 }
 
@@ -1031,7 +1034,7 @@ footer {
     padding: 0.5rem 1rem;
     background: transparent;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
+    border-radius: 0;
     color: var(--text-color);
     font-size: 0.9rem;
     font-weight: 500;
@@ -1055,6 +1058,31 @@ footer {
 .share-button svg {
     width: 16px;
     height: 16px;
+}
+
+.share-button.copied {
+    background: #10b981 !important;
+    color: white !important;
+    border-color: #10b981 !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.share-button.copied:hover {
+    background: #059669 !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+/* Ensure copied state works properly with active cards */
+.blog-card.active .share-button.copied {
+    background: #10b981 !important;
+    color: white !important;
+    border-color: #10b981 !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.blog-card.active .share-button.copied:hover {
+    background: #059669 !important;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
 }
 
 @media (max-width: 768px) {

@@ -137,31 +137,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const url = new URL(window.location);
             url.searchParams.set('post', postId);
             
+            // Store original button content
+            const originalContent = button.innerHTML;
+            
             navigator.clipboard.writeText(url.toString()).then(() => {
-                // Create a temporary notification
-                const notification = document.createElement('div');
-                notification.textContent = 'Link copied to clipboard!';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: var(--primary-color);
-                    color: white;
-                    padding: 12px 20px;
-                    border-radius: 8px;
-                    font-size: 14px;
-                    z-index: 1000;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                    transition: opacity 0.3s ease;
+                // Change button text to show success
+                button.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+                    </svg>
+                    Copied!
                 `;
+                button.classList.add('copied');
                 
-                document.body.appendChild(notification);
-                
+                // Reset button after 2 seconds
                 setTimeout(() => {
-                    notification.style.opacity = '0';
-                    setTimeout(() => {
-                        document.body.removeChild(notification);
-                    }, 300);
+                    button.innerHTML = originalContent;
+                    button.classList.remove('copied');
                 }, 2000);
             }).catch(() => {
                 alert('Link copied to clipboard!');
