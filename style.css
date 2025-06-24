@@ -70,15 +70,15 @@ h2 {
     height: 90px;
     display: flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    background: rgba(18, 18, 18, 0.9);
+    box-shadow: 0 1px 8px rgba(18,18,18,0.3);
     transition: background 0.3s, box-shadow 0.3s;
 }
 
 /* Navigation scrolled state - ENABLED FOR HEADER TO CONTENT TRANSITION */
 .main-nav.scrolled {
     background: rgba(255,255,255,0.92);
-    box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 8px rgba(18,18,18,0.07);
 }
 
 .main-nav.scrolled .nav-link {
@@ -112,10 +112,10 @@ h2 {
     fill: white !important;
 }
 
-/* Navigation blog-scrolled state - for black background sections */
+/* Navigation blog-scrolled state - for #121212 background sections */
 .main-nav.blog-scrolled {
-    background: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    background: rgba(18, 18, 18, 0.9);
+    box-shadow: 0 1px 8px rgba(18,18,18,0.3);
 }
 
 .main-nav.blog-scrolled .nav-link {
@@ -123,7 +123,7 @@ h2 {
 }
 
 .main-nav.blog-scrolled .nav-link:hover {
-    color: #cccccc;
+    color: #f0f0f0;
 }
 
 .main-nav.blog-scrolled .nav-link.active {
@@ -136,20 +136,20 @@ h2 {
 
 .main-nav.blog-scrolled .cta-button {
     background-color: white;
-    color: black;
+    color: #121212;
 }
 
 .main-nav.blog-scrolled .cta-button:hover {
     background-color: #f0f0f0;
-    color: black;
+    color: #121212;
 }
 
 .main-nav.blog-scrolled .logo svg {
-    filter: none;
+    fill: white;
 }
 
 .main-nav.blog-scrolled .logo svg mask *,
-.main-nav.blog-scrolled .logo svg clipPath * {
+.main-nav.blog-scrolled .logo svg path {
     fill: white !important;
 }
 
@@ -273,7 +273,7 @@ h2 {
     display: inline-block;
     padding: 0.625rem 1.25rem;
     background-color: white;
-    color: black;
+    color: #121212;
     text-decoration: none;
     border-radius: 0;
     font-weight: 500;
@@ -285,7 +285,7 @@ h2 {
 
 .cta-button:hover {
     background-color: #f0f0f0;
-    color: black;
+    color: #121212;
     transform: translateY(-1px);
 }
 
@@ -367,7 +367,7 @@ section {
     margin: 3rem 0;
     border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(18, 18, 18, 0.1);
     aspect-ratio: 16/9;
 }
 
@@ -617,7 +617,7 @@ footer {
     width: 100%;
     max-width: 100%;
     border-radius: 0px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    box-shadow: 0 4px 24px rgba(18,18,18,0.07);
     object-fit: cover;
     background: #f7f7f7;
     flex-shrink: 0;
@@ -887,7 +887,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    background-color: black;
+    background-color: #121212;
     border-bottom: 2px solid #f6f6f6;
 }
 
@@ -920,7 +920,7 @@ footer {
     background: white;
     padding: 2.5rem 2.5rem 2rem 2.5rem;
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    box-shadow: 0 4px 24px rgba(18,18,18,0.07);
     max-width: 700px;
     margin-left: 0;
     margin-right: auto;
@@ -959,7 +959,7 @@ footer {
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    background-color: black;
+    background-color: #121212;
     color: white;
     z-index: 2;
 }
@@ -987,7 +987,7 @@ footer {
 }
 
 .blog-card {
-    background: black;
+    background: #121212;
     color: white;
     padding: 2rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1006,7 +1006,7 @@ footer {
 }
 
 .blog-card.active {
-    background: black;
+    background: #121212;
     color: white;
     transform: none;
     box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
@@ -1021,7 +1021,7 @@ footer {
 
 .blog-card.active .share-button {
     background: rgba(255, 255, 255, 0.9);
-    color: black;
+    color: #121212;
     border: 1px solid rgba(255, 255, 255, 1);
 }
 
@@ -1073,7 +1073,7 @@ footer {
 
 .blog-content-expanded {
     display: none;
-    background: black;
+    background: #121212;
     color: white;
     padding: 3rem 2rem;
     margin-top: 2rem;
@@ -1293,7 +1293,7 @@ footer {
 
 .blog-card.active .share-button {
     background: rgba(255, 255, 255, 0.9);
-    color: black;
+    color: #121212;
     border: 1px solid rgba(255, 255, 255, 1);
 }
 
@@ -1560,4 +1560,25 @@ a:hover {
     background-color: var(--primary-color);
     color: white;
     transform: translateY(-2px);
+}
+
+/* Social media links in CTA */
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0.1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: #2a2a3e;
+    transform: translateY(-1px);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
+    margin: 0 0.25rem;
 } 
