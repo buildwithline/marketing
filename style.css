@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+/* Additional reset for h3 and p elements */
+h3, p {
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --primary-color: #121212; /* Deep dark purple */
     --text-color: #333333;
@@ -30,7 +36,7 @@ h1 {
     font-weight: 900;
     line-height: 1.1;
     color: white;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
     max-width: 1400px;
     transition: color 0.4s ease;
@@ -64,8 +70,8 @@ h2 {
     height: 90px;
     display: flex;
     align-items: center;
-    background: transparent;
-    box-shadow: none;
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.3);
     transition: background 0.3s, box-shadow 0.3s;
 }
 
@@ -313,7 +319,7 @@ section {
     font-weight: 900;
     line-height: 1.1;
     color: white;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
     max-width: 1400px;
     transition: color 0.4s ease;
@@ -333,6 +339,15 @@ section {
     max-width: 1400px;
 }
 
+.hero-subtext p:last-child {
+    margin-bottom: 0;
+}
+
+.hero-subtext p:nth-child(3),
+.hero-subtext p:nth-child(4) {
+    color: #666666;
+}
+
 .hero-subtext p {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     line-height: 1.4;
@@ -343,10 +358,6 @@ section {
 
 .hero-subtext p:first-child {
     font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-}
-
-.hero-subtext p:last-child {
-    margin-bottom: 0;
 }
 
 .video-container {
@@ -564,13 +575,16 @@ footer {
 .features-stacked {
     display: flex;
     flex-direction: column;
-    gap: 90px;
-    margin-top: 3rem;
+    gap: 120px;
     position: relative;
     z-index: 2;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: calc(var(--spacing-unit) * 8) 2rem;
 }
 
 .feature-block {
@@ -579,7 +593,18 @@ footer {
     align-items: flex-start;
     gap: 32px;
     margin: 0 auto;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.feature-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.feature-image {
     width: 100%;
 }
 
@@ -602,7 +627,7 @@ footer {
 .feature-text {
     flex: 1;
     text-align: left;
-    max-width: 600px;
+    max-width: none;
 }
 
 .feature-text h3 {
@@ -617,24 +642,79 @@ footer {
     font-size: 1.18rem;
     line-height: 1.7;
     color: var(--text-color);
-    max-width: 640px;
+    max-width: none;
 }
 
 .feature-block h3 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
     font-weight: 900;
     line-height: 1.15;
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: -0.5rem;
     letter-spacing: -0.01em;
 }
 
 .feature-block p {
-    font-size: clamp(1.5rem, 3vw, 1.7rem);
-    line-height: 1.7;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    line-height: 1.4;
     color: var(--text-color);
     max-width: none;
-    margin-bottom: 0;
+    margin-top: 0;
+}
+
+/* Large Desktop Layout (2-column) */
+@media (min-width: 1024px) {
+    .features-stacked {
+        padding: calc(var(--spacing-unit) * 8) 2rem;
+        gap: 140px;
+    }
+    
+    .feature-block {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .feature-content {
+        order: 2;
+        padding-left: 0;
+        max-width: none;
+        width: 100%;
+    }
+    
+    .feature-image {
+        order: 1;
+        width: 100%;
+    }
+    
+    /* Middle block (2nd) - keep original layout: text left, image right */
+    .feature-block:nth-child(2) .feature-content {
+        order: 1;
+    }
+    
+    .feature-block:nth-child(2) .feature-image {
+        order: 2;
+    }
+    
+    .feature-block h3 {
+        font-size: clamp(2rem, 3.5vw, 2.8rem);
+        margin-bottom: -0.5rem;
+    }
+    
+    .feature-block p {
+        font-size: clamp(1.3rem, 2vw, 1.7rem);
+        line-height: 1.4;
+        margin-top: 0;
+        max-width: none;
+    }
+    
+    .feature-img {
+        margin-bottom: 0;
+        width: 100%;
+    }
 }
 
 /* Responsive Design */
@@ -694,6 +774,11 @@ footer {
     .logo {
         height: 36px;
     }
+
+    .hero-subtext p:nth-child(3),
+    .hero-subtext p:nth-child(4) {
+        display: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -746,9 +831,25 @@ footer {
     .header-bg-container .overlay {
         opacity: 1;
     }
+    .nav-link[href*="cal.com"] {
+        display: none !important;
+    }
 }
 
 @media (max-width: 900px) {
+    .feature-block {
+        flex-direction: column !important;
+        gap: 32px;
+        align-items: flex-start;
+    }
+    .feature-img {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 1023px) {
     .feature-block {
         flex-direction: column !important;
         gap: 32px;
@@ -1417,4 +1518,46 @@ a:hover {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.hero-demo-button {
+    display: inline-block;
+    background-color: transparent;
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 2.5rem 0;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+
+.hero-demo-button:hover {
+    background-color: white;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.feature-demo-button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--primary-color);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color);
+    width: fit-content;
+    align-self: flex-start;
+}
+
+.feature-demo-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
 } 
