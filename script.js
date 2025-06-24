@@ -1,14 +1,73 @@
 // Handle nav shadow on scroll
-const nav = document.querySelector('.main-nav');
+let nav, headerContainer, howWeHelpSection, blogSection;
 let lastScroll = 0;
 
+// Initialize elements when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    nav = document.querySelector('.main-nav');
+    headerContainer = document.querySelector('.header-bg-container');
+    howWeHelpSection = document.getElementById('how-we-help');
+    blogSection = document.getElementById('blog');
+    
+    console.log('Elements found:', {
+        nav: !!nav,
+        headerContainer: !!headerContainer,
+        howWeHelpSection: !!howWeHelpSection,
+        blogSection: !!blogSection
+    });
+});
+
 window.addEventListener('scroll', () => {
+    // Make sure elements are available
+    if (!nav || !headerContainer) return;
+    
     const currentScroll = window.pageYOffset;
     
+    // Add scrolled class when we've scrolled past the header to either "How we help" or "blog" sections
+    if (howWeHelpSection || blogSection) {
+        const headerHeight = headerContainer.offsetHeight;
+        const navHeight = 90; // Height of the nav
+        
+        // Check if we're over the "How we help" section
+        const howWeHelpOffset = howWeHelpSection ? howWeHelpSection.offsetTop - navHeight : Infinity;
+        const howWeHelpBottom = howWeHelpSection ? howWeHelpSection.offsetTop + howWeHelpSection.offsetHeight : 0;
+        
+        // Check if we're over the blog section
+        const blogOffset = blogSection ? blogSection.offsetTop - navHeight : Infinity;
+        const blogBottom = blogSection ? blogSection.offsetTop + blogSection.offsetHeight : 0;
+        
+        // Check if we're currently over either section
+        const isOverHowWeHelp = currentScroll >= howWeHelpOffset && currentScroll < howWeHelpBottom;
+        const isOverBlog = currentScroll >= blogOffset && currentScroll < blogBottom;
+        
+        // Debug logging
+        console.log('Scroll Debug:', {
+            currentScroll,
+            howWeHelpOffset,
+            howWeHelpBottom,
+            blogOffset,
+            blogBottom,
+            isOverHowWeHelp,
+            isOverBlog,
+            blogSectionExists: !!blogSection
+        });
+        
+        // Remove all scroll classes first
+        nav.classList.remove('scrolled', 'blog-scrolled');
+        
+        // Add appropriate class based on which section we're over
+        if (isOverHowWeHelp) {
+            nav.classList.add('scrolled');
+        } else if (isOverBlog) {
+            nav.classList.add('blog-scrolled');
+        }
+    }
+    
+    // Keep the header container scrolled class for potential future use
     if (currentScroll > 0) {
-        nav.classList.add('scrolled');
+        headerContainer.classList.add('scrolled');
     } else {
-        nav.classList.remove('scrolled');
+        headerContainer.classList.remove('scrolled');
     }
     
     lastScroll = currentScroll;
