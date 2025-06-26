@@ -15,6 +15,29 @@ document.addEventListener('DOMContentLoaded', () => {
         howWeHelpSection: !!howWeHelpSection,
         blogSection: !!blogSection
     });
+
+    // Handle responsive CTA button changes
+    const ctaButton = document.querySelector('.cta-button[data-mobile-href]');
+    
+    function updateCTAButton() {
+        if (!ctaButton) return;
+        
+        if (window.innerWidth <= 768) {
+            // Mobile/tablet: Change to "Schedule demo" and update href
+            ctaButton.textContent = ctaButton.getAttribute('data-mobile-text');
+            ctaButton.href = ctaButton.getAttribute('data-mobile-href');
+            ctaButton.target = '_blank';
+        } else {
+            // Desktop: Keep original "Get early access" and href
+            ctaButton.textContent = 'Get early access';
+            ctaButton.href = '#contact';
+            ctaButton.removeAttribute('target');
+        }
+    }
+    
+    // Update on load and resize
+    updateCTAButton();
+    window.addEventListener('resize', updateCTAButton);
 });
 
 window.addEventListener('scroll', () => {

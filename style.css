@@ -779,6 +779,10 @@ footer {
     .hero-subtext p:nth-child(4) {
         display: none;
     }
+    
+    .hero-demo-button.mobile-hidden {
+        display: none !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -833,6 +837,11 @@ footer {
     }
     .nav-link[href*="cal.com"] {
         display: none !important;
+    }
+    
+    /* Update CTA button for mobile */
+    .cta-button[data-mobile-href] {
+        content: attr(data-mobile-text);
     }
 }
 
@@ -1150,13 +1159,13 @@ footer {
 .blog-content-expanded ul,
 .blog-content-expanded ol {
     margin-bottom: 2rem;
-    padding-left: 0;
-    list-style-position: inside;
+    padding-left: 1.5rem;
+    list-style-position: outside;
 }
 
 .blog-content-expanded li {
     margin-bottom: 0.5rem;
-    padding-left: 0;
+    padding-left: 0.5rem;
 }
 
 .blog-content-expanded blockquote {
@@ -1581,4 +1590,75 @@ a:hover {
     width: 20px;
     height: 20px;
     margin: 0 0.25rem;
+}
+
+/* Mobile responsive button changes */
+@media (max-width: 768px) {
+    .hero-demo-button.mobile-hidden {
+        display: none !important;
+    }
+    
+    .cta-button[data-mobile-href] {
+        content: attr(data-mobile-text);
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 2rem;
+    }
+    .nav-links {
+        gap: 1rem;
+    }
+    .nav-link {
+        display: none !important;
+    }
+    .cta-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    .features li {
+        font-size: 1.1rem;
+    }
+    .video-container {
+        margin: 1.5rem 0;
+    }
+    .hero {
+        padding-top: 120px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .hero .subtext {
+        margin-bottom: 1.5rem;
+    }
+    .overview h2 {
+        font-size: 1.5rem;
+    }
+    .overview .features li {
+        font-size: 1.1rem;
+    }
+    main {
+        margin-top: 60px;
+    }
+    .logo {
+        height: 32px;
+    }
+    .cta-inner {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .mobile-demo-link {
+        display: inline-block !important;
+    }
+    .header-bg-container .overlay {
+        opacity: 1;
+    }
+    .nav-link[href*="cal.com"] {
+        display: none !important;
+    }
+    
+    /* Update CTA button for mobile */
+    .cta-button[data-mobile-href] {
+        content: attr(data-mobile-text);
+    }
 } 
